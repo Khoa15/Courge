@@ -137,6 +137,7 @@ const ResponsiveAppBar = (props) => {
   const {state, dispatch} = React.useContext(AppContext);
   const {user} = state;
   const nameRes = props.nameRes
+  console.log(nameRes)
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const handleTextSearch = (e)=>{
     dispatch({type: 'GET_SEARCH_BOX', search: e.target.value})
