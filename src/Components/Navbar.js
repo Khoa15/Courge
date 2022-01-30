@@ -66,13 +66,14 @@ function User(props){
     const navigate = useNavigate()
     const {state, dispatch} = React.useContext(AppContext);
     const {user} = state    
+    const nameRes = props.nameRes
     const SignOut = () =>{
       localStorage.removeItem("token")
       dispatch({type: "CURRENT_USER", payload: null})
     }
 
     const handleToDashboard = ()=>{
-      window.location = '/cpadmin'
+      window.location = `${nameRes}/cpadmin`
     }
 
     return(
@@ -85,7 +86,7 @@ function User(props){
               </IconButton>
             </Tooltip>}
 
-            <Tooltip title="User setting" onClick={()=>navigate("/user")}>
+            <Tooltip title="User setting" onClick={()=>navigate(nameRes+"/user")}>
               <IconButton>
                 <Avatar alt="Remy Sharp" />
               </IconButton>
@@ -108,14 +109,14 @@ function ButtonLogin(props){
         open: false,
         showPassword: false
     });
-    
+    const nameRes = props.nameRes
     const handleOpenDialog = () => {
         setValues({...values, open: !values.open})
     }
     return (
         <Box sx={{display: { md: 'flex' } }}>
             <Tooltip title="Login">
-                <Link href="/login.html" color="inherit">
+                <Link href={`${nameRes}/login.html`} color="inherit">
                   <IconButton
                       size="large"
                       onClick={handleOpenDialog}
@@ -135,6 +136,7 @@ function ButtonLogin(props){
 const ResponsiveAppBar = (props) => {
   const {state, dispatch} = React.useContext(AppContext);
   const {user} = state;
+  const nameRes = props.nameRes
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const handleTextSearch = (e)=>{
     dispatch({type: 'GET_SEARCH_BOX', search: e.target.value})
@@ -153,7 +155,7 @@ const ResponsiveAppBar = (props) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href="/" color="inherit" underline="none">
+          <Link href={`${nameRes}`} color="inherit" underline="none">
             <Typography
               variant="h6"
               noWrap
@@ -200,7 +202,7 @@ const ResponsiveAppBar = (props) => {
               ))}
             </Menu>
           </Box>
-          <Link href="/" color="inherit" underline="none">
+          <Link href={`${nameRes}`} color="inherit" underline="none">
             <Typography
               variant="h6"
               noWrap
@@ -235,7 +237,7 @@ const ResponsiveAppBar = (props) => {
             />
           </Search>
           <Box sx={{ flexGrow: 1, display:{xs: 'none',sm:'flex'} }} />
-          {user ? <User /> : <ButtonLogin />}
+          {user ? <User nameRes={nameRes}/> : <ButtonLogin nameRes={nameRes} />}
         </Toolbar>
       </Container>
     </AppBar>

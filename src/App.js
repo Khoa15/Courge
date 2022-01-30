@@ -14,6 +14,7 @@ import axios from 'axios';
 function App() {
   const initialState = {user: null, posts: [], post: null, search: ""}
   const [state, dispatch] = React.useReducer(AppReducer, initialState)
+  const nameRes = "https://khoa15.github.io/Courge/"
   const siteName = window.location.pathname.split("/")[1]
   const checkCurrentUser = React.useCallback(async()=>{
     try {
@@ -41,14 +42,14 @@ function App() {
     <BrowserRouter>
       <AppContext.Provider value={{state, dispatch}}>
         <div className="App">
-          {siteName !== "cpadmin" && <Appbar />}
+          {siteName !== "cpadmin" && <Appbar nameRes={nameRes} />}
           <Routes>
             <Route exact path="/" element={<Posts />}/>
-            <Route exact path="/login.html" element={<Login />}/>
-            <Route exact path="/register.html" element={<Register />}/>
-            <Route exact path="/post/:postId" element={<PostDetail />} />
-            <Route exact path="/cpadmin" element={<Dashboard />} />
-            <Route exact path="/user" element={<User />} />
+            <Route exact path={`${nameRes}/login.html`} element={<Login />}/>
+            <Route exact path={`${nameRes}/register.html`} element={<Register />}/>
+            <Route exact path={`${nameRes}/post/:postId`} element={<PostDetail />} />
+            <Route exact path={`${nameRes}/cpadmin`} element={<Dashboard />} />
+            <Route exact path={`${nameRes}/user`} element={<User />} />
             <Route exact path="*" element={<div>The site not found</div>} />
           </Routes>
         </div>
