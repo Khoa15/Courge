@@ -116,7 +116,7 @@ function ButtonLogin(props){
     return (
         <Box sx={{display: { md: 'flex' } }}>
             <Tooltip title="Login">
-                <Link href={`${nameRes}/login.html`} color="inherit">
+                <Link href={`/login.html`} color="inherit">
                   <IconButton
                       size="large"
                       onClick={handleOpenDialog}
