@@ -105,6 +105,7 @@ function User(props){
 }
 
 function ButtonLogin(props){
+  const navigate = useNavigate()
     const [values, setValues] = React.useState({
         open: false,
         showPassword: false
@@ -114,9 +115,10 @@ function ButtonLogin(props){
         setValues({...values, open: !values.open})
     }
     return (
+      // href={`${nameRes}/login.html`}
         <Box sx={{display: { md: 'flex' } }}>
             <Tooltip title="Login">
-                <Link href={`${nameRes}/login.html`} color="inherit">
+                <Link onClick={()=>navigate("/Courge/login")} color="inherit">
                   <IconButton
                       size="large"
                       onClick={handleOpenDialog}
