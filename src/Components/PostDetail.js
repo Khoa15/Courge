@@ -29,7 +29,7 @@ export default function PostDetail(props)  {
             const res = await axios(option);
             setPost(res.data.post)
             if(user){
-                setIsJoin(res.data.post.students.filter(student => student._id === user.id ) !== "")
+                setIsJoin(res.data.post.students.filter(student => student._id === user.id ).length !== 0)
             }
         }
         getPost()

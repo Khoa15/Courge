@@ -205,7 +205,7 @@ const ResponsiveAppBar = (props) => {
               ))}
             </Menu>
           </Box>
-          <Link href={`${nameRes.name}`} color="inherit" underline="none">
+          <Link component="button" onClick={()=>navigate(`${nameRes.name}`)} color="inherit" underline="none">
             <Typography
               variant="h6"
               noWrap
