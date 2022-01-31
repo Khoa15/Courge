@@ -3,7 +3,7 @@ import AppContext from './AppContext';
 import axios from 'axios';
 import {Container, Grid} from '@mui/material'
 import PostItem from './PostItem'
-function Posts(){
+function Posts(props){
     const {state, dispatch} = React.useContext(AppContext)
     const {posts, user, search} = state
     const getAllPosts = React.useCallback(async()=>{
@@ -27,7 +27,7 @@ function Posts(){
         <Container sx={{py: 8}} maxWidth="md">
             <Grid container spacing={4}>
                 {newPosts.map((post) => (
-                    <PostItem key={post._id} post={post} /> 
+                    <PostItem key={post._id} post={post} nameRes={props.nameRes} /> 
                 ))
                 }
             </Grid>
