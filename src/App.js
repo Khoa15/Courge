@@ -19,9 +19,10 @@ function App() {
   const checkCurrentUser = React.useCallback(async()=>{
     try {
       const token = localStorage.getItem("token")
+      if(!token) return;
       const option ={
         method:'get',
-        url:nameRes.server+'api/v1/auth',
+        url:nameRes.server+'/api/v1/auth',
         headers:{
           Authorization: `Bearer ${token}`,
         },
