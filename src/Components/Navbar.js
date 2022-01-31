@@ -73,7 +73,7 @@ function User(props){
     }
 
     const handleToDashboard = ()=>{
-      window.location = `${nameRes.name}/cpadmin`
+      navigate(`${nameRes.name}/cpadmin`)
     }
 
     return(
@@ -136,6 +136,7 @@ function ButtonLogin(props){
 }
 
 const ResponsiveAppBar = (props) => {
+  const navigate = useNavigate()
   const {state, dispatch} = React.useContext(AppContext);
   const {user} = state;
   const nameRes = props.nameRes
@@ -157,7 +158,7 @@ const ResponsiveAppBar = (props) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href={`${nameRes.name}`} color="inherit" underline="none">
+          <Link component="button" onClick={()=>navigate(`${nameRes.name}`)} color="inherit" underline="none">
             <Typography
               variant="h6"
               noWrap

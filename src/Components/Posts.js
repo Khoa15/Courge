@@ -5,7 +5,7 @@ import {Container, Grid} from '@mui/material'
 import PostItem from './PostItem'
 function Posts(props){
     const {state, dispatch} = React.useContext(AppContext)
-    const {posts, user, search} = state
+    const {posts, search} = state
     const getAllPosts = React.useCallback(async()=>{
         try {
             const option ={
