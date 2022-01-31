@@ -2,7 +2,8 @@ import {useEffect, useState} from 'react'
 import { Container, Grid, Typography, Card, CardContent, CardActions, Button } from "@mui/material";
 import axios from 'axios';
 
-export default function Dashboard(){
+export default function Dashboard(props){
+  const {server} = props.nameRes
   const [countCourses, setCountCourses] = useState(0)
   const [countUsers, setCountUsers] = useState(0)
   const [countLessons, setCountLessons] = useState(0)
@@ -11,7 +12,7 @@ export default function Dashboard(){
     try {
       const option = {
         method: 'get',
-        url: '/api/v1/analysis/data',
+        url: server+'/api/v1/analysis/data',
         headers:{
           Authorization: token
         }

@@ -73,7 +73,7 @@ function User(props){
     }
 
     const handleToDashboard = ()=>{
-      window.location = `${nameRes}/cpadmin`
+      window.location = `${nameRes.name}/cpadmin`
     }
 
     return(
@@ -86,7 +86,7 @@ function User(props){
               </IconButton>
             </Tooltip>}
 
-            <Tooltip title="User setting" onClick={()=>navigate(nameRes+"/user")}>
+            <Tooltip title="User setting" onClick={()=>navigate(nameRes.name+"/user")}>
               <IconButton>
                 <Avatar alt="Remy Sharp" />
               </IconButton>
@@ -157,7 +157,7 @@ const ResponsiveAppBar = (props) => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Link href={`${nameRes}`} color="inherit" underline="none">
+          <Link href={`${nameRes.name}`} color="inherit" underline="none">
             <Typography
               variant="h6"
               noWrap
@@ -204,7 +204,7 @@ const ResponsiveAppBar = (props) => {
               ))}
             </Menu>
           </Box>
-          <Link href={`${nameRes}`} color="inherit" underline="none">
+          <Link href={`${nameRes.name}`} color="inherit" underline="none">
             <Typography
               variant="h6"
               noWrap

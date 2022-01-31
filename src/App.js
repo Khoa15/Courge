@@ -14,15 +14,14 @@ import axios from 'axios';
 function App() {
   const initialState = {user: null, posts: [], post: null, search: ""}
   const [state, dispatch] = React.useReducer(AppReducer, initialState)
-  const nameRes = "/Courge"
-  console.log()
+  const nameRes = {name: "/Courge", server:"https://server-courge.herokuapp.com"}
   const siteName = window.location.pathname.split("/")[1]
   const checkCurrentUser = React.useCallback(async()=>{
     try {
       const token = localStorage.getItem("token")
       const option ={
         method:'get',
-        url:'/api/v1/auth',
+        url:nameRes.server+'api/v1/auth',
         headers:{
           Authorization: `Bearer ${token}`,
         },
@@ -45,13 +44,13 @@ function App() {
         <div className="App">
           {siteName !== "cpadmin" && <Appbar nameRes={nameRes} />}
           <Routes>
-            <Route exact path={`${nameRes}`} element={<Posts />}/>
-            <Route exact path={`${nameRes}/login.html`} element={<Login />}/>
-            <Route exact path={`${nameRes}/register.html`} element={<Register />}/>
-            <Route exact path={`${nameRes}/post/:postId`} element={<PostDetail />} />
-            <Route exact path={`${nameRes}/cpadmin`} element={<Dashboard />} />
-            <Route exact path={`${nameRes}/user`} element={<User />} />
-            <Route exact path={`${nameRes}/*`} element={<div>The site not found</div>} />
+            <Route exact path={`${nameRes.name}`} element={<Posts />}/>
+            <Route exact path={`${nameRes.name}/login.html`} element={<Login nameRes={nameRes} />}/>
+            <Route exact path={`${nameRes.name}/register.html`} element={<Register nameRes={nameRes} />}/>
+            <Route exact path={`${nameRes.name}/post/:postId`} element={<PostDetail nameRes={nameRes} />} />
+            <Route exact path={`${nameRes.name}/cpadmin`} element={<Dashboard nameRes={nameRes} />} />
+            <Route exact path={`${nameRes.name}/user`} element={<User />} />
+            <Route exact path={`${nameRes.name}/*`} element={<div>The site not found</div>} />
           </Routes>
         </div>
       </AppContext.Provider>

@@ -41,8 +41,8 @@ function a11yProps(index) {
   };
 }
 
-export default function VerticalTabs() {
-  
+export default function VerticalTabs(props) {
+  const nameRes = props.nameRes
   const [value, setValue] = React.useState(0);
 
   const con = "contained"
@@ -68,9 +68,9 @@ export default function VerticalTabs() {
             </List>
           </Paper>
         </Grid>
-        {!value && <Dashboard />}
-        {value==1 && <Courses />}
-        {value==2 && <Users />}
+        {!value && <Dashboard nameRes={nameRes} />}
+        {value==1 && <Courses nameRes={nameRes} />}
+        {value==2 && <Users nameRes={nameRes} />}
 
       </Grid>
     </Container>

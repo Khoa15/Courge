@@ -5,7 +5,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import InfoIcon from '@mui/icons-material/Info';
 import axios from 'axios'
-export default function Courses(){
+export default function Courses(props){
+    const nameRes = props.nameRes
     const [courses, setCourses] = useState(null)
     const [courseInput, setCourseInput] = useState({})
     const [lessonInput, setLessonInput] = useState([])
@@ -29,7 +30,7 @@ export default function Courses(){
         try {
             const option = {
                 method:'put',
-                url:'/api/v1/posts/'+courseChange.id,
+                url: nameRes.server+'/api/v1/posts/'+courseChange.id,
                 headers:{
                     Authorization: token
                 },
@@ -75,7 +76,7 @@ export default function Courses(){
                     lessonInput.map((lesson)=>{
                         let option = {
                             method:'DELETE',
-                            url:'/api/v1/lessons/'+lesson,
+                            url:nameRes.server+'/api/v1/lessons/'+lesson,
                             headers:{
                                 Authorization: token
                             }
@@ -83,7 +84,7 @@ export default function Courses(){
                         courseInput.lessons.map((lesson)=>{//update lesson
                             let option2 = {
                                 method: 'post',
-                                url: '/api/v1/lessons/'+lesson._id,
+                                url: nameRes.server+'/api/v1/lessons/'+lesson._id,
                                 headers:{
                                     Authorization: token
                                 },data:{
@@ -94,11 +95,11 @@ export default function Courses(){
                             }
                             if(lesson.isAdd){
                                 option2.method = 'post'
-                                option2.url = '/api/v1/lessons'
+                                option2.url = nameRes.server+'/api/v1/lessons'
                             }
                             axios(option2).then((rel)=>{
                                 if(lesson.isAdd){
-                                    option2.url = '/api/v1/posts/'+courseInput._id
+                                    option2.url = nameRes.server+'/api/v1/posts/'+courseInput._id
                                     option2.data = {lessons: rel.data.lesson._id}
                                     axios(option2).then((result)=>{
                                         console.log(result, 'hi')
@@ -108,7 +109,7 @@ export default function Courses(){
                             })
                         })
                         axios(option).then((res)=>{
-                            option.url = '/api/v1/posts/'+courseInput._id+'/lesson'
+                            option.url = nameRes.server+'/api/v1/posts/'+courseInput._id+'/lesson'
                             option.data = {lessons: lesson}
                             axios(option).then((rel)=>{
                                 console.log(rel.data)
@@ -121,7 +122,7 @@ export default function Courses(){
                     headers:{
                         Authorization: token
                     },
-                    url: '/api/v1/posts/'+courseInput._id,
+                    url: nameRes.server+'/api/v1/posts/'+courseInput._id,
                     data: {
                         title: courseInput.title,
                         content: courseInput.content,
@@ -136,7 +137,7 @@ export default function Courses(){
             try {
                 const option = {
                     method: 'post',
-                    url:'/api/v1/posts/',
+                    url:nameRes.server+'/api/v1/posts/',
                     headers:{
                         Authorization: token
                     },
@@ -185,7 +186,7 @@ export default function Courses(){
         try {
             const option = {
                 method: 'get',
-                url:'/api/v1/posts',
+                url:nameRes.server+'/api/v1/posts',
                 headers:{
                     Authorization: token
                 }
@@ -225,7 +226,7 @@ export default function Courses(){
             try {
                 const option = {
                     method: 'delete',
-                    url:'/api/v1/posts/'+e.id,
+                    url:nameRes.server+'/api/v1/posts/'+e.id,
                     headers:{
                         Authorization: token
                     }
@@ -234,7 +235,7 @@ export default function Courses(){
                     e.row.lessons.map((lesson)=>{
                         axios({
                             method:'delete',
-                            url:'/api/v1/lessons/'+lesson._id,
+                            url:nameRes.server+'/api/v1/lessons/'+lesson._id,
                             headers:{
                                 Authorization: token
                             }
@@ -253,7 +254,7 @@ export default function Courses(){
         try {
             const option = {
                 method: 'get',
-                url:'/api/v1/posts/'+e.id,
+                url:nameRes.server+'/api/v1/posts/'+e.id,
                 headers:{
                     Authorization: token
                 }

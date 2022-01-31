@@ -6,6 +6,7 @@ import {Container, Grid, Box, Divider, Typography, Card, CardContent, Button, Li
 export default function PostDetail(props)  {
     const {state, dispatch} = useContext(AppContext)
     const {user} = state
+    const {server} = props.nameRes
     const [post, setPost] = useState(null)
     const [lesson, setLesson] = useState(null)
     const [isJoin, setIsJoin] = useState(0)
@@ -23,7 +24,7 @@ export default function PostDetail(props)  {
         const getPost = async()=>{
             const option = {
                 method: 'get',
-                url: '/api/v1/posts/'+postId
+                url: server+'/api/v1/posts/'+postId
             }
             const res = await axios(option);
             setPost(res.data.post)
@@ -43,7 +44,7 @@ export default function PostDetail(props)  {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
-                url: '/api/v1/lessons/'+id
+                url: server+'/api/v1/lessons/'+id
             }
             const res = await axios(option)
             if(res.data.success){
@@ -59,7 +60,7 @@ export default function PostDetail(props)  {
             const studentId = user.id
             const option = {
                 method: 'post',
-                url: '/api/v1/posts/'+postId+'/student',
+                url: server+'/api/v1/posts/'+postId+'/student',
                 headers:{
                     Authorization: `Bearer ${token}`
                 },

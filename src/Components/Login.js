@@ -5,6 +5,7 @@ import AppContext from './AppContext';
 import axios from 'axios';
 const Login = (props) =>{
     const navigate = useNavigate();
+    const {name, server} = props.nameRes
     const {dispatch} = React.useContext(AppContext)
     const [userInput, setUserInput] = React.useState({email: "", password: ""})
     const [errorMessage, setErrorMessage] = React.useState(null)
@@ -16,7 +17,7 @@ const Login = (props) =>{
             event.preventDefault();
             const option = {
                 method: 'post',
-                url: '/api/v1/auth/login',
+                url: server+'/api/v1/auth/login',
                 data: userInput
             }
             const response = await axios(option)
@@ -26,7 +27,7 @@ const Login = (props) =>{
             const id = response.data.id
             localStorage.setItem("token", token)
             dispatch({type: "CURRENT_USER", payload: {userName, permission, id}})
-            navigate("/")
+            navigate(name)
         }catch(error){
             setErrorMessage(error.response.data.message)
         }
@@ -66,7 +67,7 @@ const Login = (props) =>{
                 <Button type="submit" fullWidth variant="contained">Sign In</Button>
                 <Grid container justifyContent="flex-end">
                     <Grid item>
-                        <Link href="/register.html">Don't have an account? Sign Up</Link>
+                        <Link component="button" onClick={()=>navigate(`${name}/register.html`)}>Don't have an account? Sign Up</Link>
                     </Grid>
                 </Grid>
             </Box>

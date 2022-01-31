@@ -6,36 +6,37 @@ import AppContext from '../AppContext'
 import Appbar from './Appbar'
 
 
-export default function Dashboard(){
+export default function Dashboard(props){
     const navigate = useNavigate()
+    const {name, server} = props.nameRes
     const token = localStorage.getItem("token")
     const checkPermission = useCallback(async()=>{
         try{
             const option = {
                 method: 'get',
-                url: '/api/v1/auth',
+                url: server+'/api/v1/auth',
                 headers:{
                     Authorization: `Bearer ${token}`
                 }
             }
             const res = await axios(option)
             if(res.data.data.user.permission < 2){
-                navigate('/')
+                navigate(name)
             }
         }catch(error){
             console.log(error)
-            navigate('/')
+            navigate(name)
         }
     }, [])
     useEffect(()=>{
         if(token===undefined){
-            navigate('/')
+            navigate(name)
         }
         checkPermission()
     }, [])
     return(
         <Container>
-            <Appbar />
+            <Appbar nameRes={props.nameRes} />
         </Container>
     )
 }

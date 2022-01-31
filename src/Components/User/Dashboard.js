@@ -4,8 +4,9 @@ import {useEffect, useCallback, useContext, useState} from 'react'
 import AppContext from '../AppContext'
 import PostItem from '../PostItem'
 
-export default function Dashboard(){
+export default function Dashboard(props){
     const {state, dispatch} = useContext(AppContext)
+    const {name, server} = props.nameRes
     const {search} = state
     const [temp, setTemp] = useState(null)
     const [posts, setPosts] = useState(null)
@@ -17,7 +18,7 @@ export default function Dashboard(){
                 headers:{
                     Authorization: token
                 },
-                url: '/api/v1/posts/',
+                url: server+'/api/v1/posts/',
             }
             const res = await axios(option)
             setPosts(res.data.data.posts)
@@ -39,7 +40,7 @@ export default function Dashboard(){
             <h1>Learning</h1>
             <Grid container spacing={4}>
                 {posts && posts.map((post)=>(
-                    <PostItem key={post._id} post={post} />
+                    <PostItem key={post._id} post={post} nameRes={props.nameRes} />
                 ))}
             </Grid>
         </Container>

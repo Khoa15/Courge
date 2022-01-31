@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from "react"
 import {Container, Grid, Alert} from '@mui/material'
 import {DataGrid, GridRowsProp, GridColDef, GridCellEditCommitParams} from '@mui/x-data-grid'
 import axios from 'axios'
-export default function User(){
+export default function User(props){
+    const nameRes = props.nameRes
     const [users, setUsers] = useState(null)
     const token = localStorage.getItem('token')
     const [editRowsModel, setEditRowsModel] = useState({});
@@ -10,7 +11,7 @@ export default function User(){
         try {
             const option = {
                 method: 'post',
-                url: '/api/v1/auth/users/'+e.id,
+                url: nameRes.server+'/api/v1/auth/users/'+e.id,
                 headers:{
                     Authorization: `Bearer ${token}`
                 },
@@ -42,7 +43,7 @@ export default function User(){
         try {
             const option = {
                 method: 'get',
-                url:'/api/v1/auth/users',
+                url: nameRes.server+'/api/v1/auth/users',
                 headers:{
                     Authorization: `Bearer ${token}`
                 }

@@ -1,7 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router';
 import {Card, CardMedia, CardContent, Typography, CardActions, Button, Grid, Link, Box} from '@mui/material'
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
 export default function PostItem(props){
+    const navigate = useNavigate();
     const post = props.post
     return(
         <Grid item xs={12} sm={6} md={4}>
@@ -21,7 +23,7 @@ export default function PostItem(props){
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Link href={`/post/${post._id}`} color="inherit" underline="none"><Button variant="outlined" endIcon={<ReadMoreIcon />}>More</Button></Link>
+                    <Button variant="outlined" onClick={navigate(`${props.nameRes.name}/post/${post._id}`)} endIcon={<ReadMoreIcon />}>More</Button>
                 </CardActions>
             </Card>
         </Grid>
