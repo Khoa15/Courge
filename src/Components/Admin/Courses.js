@@ -51,6 +51,7 @@ export default function Courses(props){
         handleClickOpen()
     }
     const handleClickOpen = () => {
+        setCourseInput(courseInput)
         setOpen(true);
     };
     const handleClose = () => {
@@ -72,7 +73,6 @@ export default function Courses(props){
         if(editMode){
             setEditMode(false)
             try {
-                if(lessonInput){
                     lessonInput.map((lesson)=>{
                         let option = {
                             method:'DELETE',
@@ -81,7 +81,15 @@ export default function Courses(props){
                                 Authorization: token
                             }
                         }
-                        courseInput.lessons.map((lesson)=>{//update lesson
+                        axios(option).then((res)=>{
+                            option.url = nameRes.server+'/api/v1/posts/'+courseInput._id+'/lesson'
+                            option.data = {lessons: lesson}
+                            axios(option).then((rel)=>{
+                                console.log(rel.data)
+                            })
+                        })
+                    })
+                    courseInput.lessons.map((lesson)=>{//update lesson
                             let option2 = {
                                 method: 'post',
                                 url: nameRes.server+'/api/v1/lessons/'+lesson._id,
@@ -108,16 +116,8 @@ export default function Courses(props){
                                 }
                             })
                         })
-                        axios(option).then((res)=>{
-                            option.url = nameRes.server+'/api/v1/posts/'+courseInput._id+'/lesson'
-                            option.data = {lessons: lesson}
-                            axios(option).then((rel)=>{
-                                console.log(rel.data)
-                            })
-                        })
-                    })
                 setLessonInput([])
-                }
+                
                 const option = {
                     method: 'put',
                     headers:{
@@ -130,7 +130,7 @@ export default function Courses(props){
                         image: courseInput.image,
                     }
                 }
-                const res = await axios(option)
+                await axios(option)
             } catch (error) {
                 console.log(error)
             }
@@ -206,7 +206,6 @@ export default function Courses(props){
         setCourseInput(newArr)
         setLessonInput([...lessonInput,e])
     }
-        console.log(lessonInput)
     const handleAddLesson = (e) =>{
         const newLesson = {_id: new Date().getTime(), title:"", content:"", video:"", isAdd:true}
         const newArr = {...courseInput, lessons:[... courseInput.lessons, newLesson]}
