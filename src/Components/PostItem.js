@@ -23,7 +23,7 @@ export default function PostItem(props){
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button variant="outlined" onClick={navigate(`${props.nameRes.name}/post/${post._id}`)} endIcon={<ReadMoreIcon />}>More</Button>
+                    <Button variant="outlined" onClick={()=>navigate(`${props.nameRes.name}/post/${post._id}`)} endIcon={<ReadMoreIcon />}>More</Button>
                 </CardActions>
             </Card>
         </Grid>

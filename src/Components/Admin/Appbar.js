@@ -1,13 +1,12 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import {useNavigate} from 'react-router-dom'
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Dashboard from './Dashboard'
 import Users from './Users'
 import Courses from './Courses'
-import { Container, Grid, Paper, Card, CardContent, List, ListItem, Button, Link } from '@mui/material';
+import { Container, Grid, Paper, List, ListItem, Button, Link } from '@mui/material';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -42,6 +41,7 @@ function a11yProps(index) {
 }
 
 export default function VerticalTabs(props) {
+  const navigate = useNavigate()
   const nameRes = props.nameRes
   const [value, setValue] = React.useState(0);
 
@@ -63,7 +63,7 @@ export default function VerticalTabs(props) {
                 <Button fullWidth variant={(value==2) ? con : out} onClick={() => setValue(2)}>Users</Button>
               </ListItem>
               <ListItem>
-                <Link href="/" >Home page</Link>
+                <Link component="button" onClick={()=>navigate(nameRes.name)} >Home page</Link>
               </ListItem>
             </List>
           </Paper>

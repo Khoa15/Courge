@@ -10,7 +10,7 @@ export default function PostDetail(props)  {
     const [post, setPost] = useState(null)
     const [lesson, setLesson] = useState(null)
     const [isJoin, setIsJoin] = useState(0)
-    const postId = window.location.pathname.split("/")[2];
+    const postId = window.location.pathname.split("/")[3];
     const [open, setOpen] = useState(false);
     const token = localStorage.getItem("token")
     const handleClickOpen = () => {
