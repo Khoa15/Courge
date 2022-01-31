@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Courge/static/css/main.073c9b0a.css",
-    "main.js": "/Courge/static/js/main.938be91a.js",
+    "main.js": "/Courge/static/js/main.9bef3c95.js",
     "index.html": "/Courge/index.html",
     "main.073c9b0a.css.map": "/Courge/static/css/main.073c9b0a.css.map",
-    "main.938be91a.js.map": "/Courge/static/js/main.938be91a.js.map"
+    "main.9bef3c95.js.map": "/Courge/static/js/main.9bef3c95.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.938be91a.js"
+    "static/js/main.9bef3c95.js"
   ]
 }
