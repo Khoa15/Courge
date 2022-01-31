@@ -10,7 +10,7 @@ function Posts(props){
         try {
             const option ={
                 method: 'get',
-                url: '/api/v1/posts',
+                url: props.nameRes.server+'/api/v1/posts',
             }
             const response = await axios(option);
             dispatch({type: "GET_ALL_POSTS", payload: response.data.posts})
