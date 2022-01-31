@@ -48,14 +48,13 @@ export default function Courses(props){
     }, [courseChange])
     const handleClickAddCourse = () =>{
         setCourseInput({image: 'https://source.unsplash.com/random', lessons:[]})
-        setEditMode(false)
         handleClickOpen()
     }
     const handleClickOpen = () => {
         setOpen(true);
     };
     const handleClose = () => {
-        setLessonInput([])
+        setViewCourse(false)
         setOpen(false);
     };
     const handleChangeInput = (e)=>{
@@ -71,6 +70,7 @@ export default function Courses(props){
         e.preventDefault()
         handleClose()
         if(editMode){
+            setEditMode(false)
             try {
                 if(lessonInput){
                     lessonInput.map((lesson)=>{
@@ -116,6 +116,7 @@ export default function Courses(props){
                             })
                         })
                     })
+                setLessonInput([])
                 }
                 const option = {
                     method: 'put',
