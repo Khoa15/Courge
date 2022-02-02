@@ -51,7 +51,6 @@ export default function Courses(props){
         handleClickOpen()
     }
     const handleClickOpen = () => {
-        setCourseInput(courseInput)
         setOpen(true);
     };
     const handleClose = () => {
@@ -213,11 +212,13 @@ export default function Courses(props){
     }
     const handleEditEvent = (e) =>{
         setEditMode(true)
-        setCourseInput(courses.filter(r=>{
-            if(r._id === e.id){
-                return r
-            }
-        })[0])
+        if(e.id !== courseInput._id){
+            setCourseInput(courses.filter(r=>{
+                if(r._id === e.id){
+                    return r
+                }
+            })[0])
+        }
         
         handleClickOpen()
     }
