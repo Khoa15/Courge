@@ -47,6 +47,7 @@ export default function Courses(props){
         if(courseChange!==null) saveCourse()
     }, [courseChange])
     const handleClickAddCourse = () =>{
+        setEditMode(false)
         setCourseInput({image: 'https://source.unsplash.com/random', lessons:[]})
         handleClickOpen()
     }
@@ -84,7 +85,7 @@ export default function Courses(props){
                             option.url = nameRes.server+'/api/v1/posts/'+courseInput._id+'/lesson'
                             option.data = {lessons: lesson}
                             axios(option).then((rel)=>{
-                                console.log(rel.data)
+                                console.log('Result: '+ rel.data)
                             })
                         })
                     })
@@ -116,7 +117,6 @@ export default function Courses(props){
                             })
                         })
                 setLessonInput([])
-                
                 const option = {
                     method: 'put',
                     headers:{
@@ -149,6 +149,7 @@ export default function Courses(props){
                 }
                 const res = await axios(option)
                 if(res){
+                    console.log(res)
                     const postId = res.data.post._id
                     if(courseInput.lessons.length > 0){
                         courseInput.lessons.map((lesson)=>{//update lesson
@@ -171,11 +172,11 @@ export default function Courses(props){
                                 })
                             })
                         })
+                        setCourses([...courses, res.data.post])
                     }else{
                         getAllPosts();
                     }
                 }
-                setCourses([...courses, res.data.post])
                 } catch (error) {
                     console.log(error)
                 }

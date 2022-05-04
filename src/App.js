@@ -10,11 +10,15 @@ import Register from './Components/Register'
 import PostDetail from './Components/PostDetail'
 import Dashboard from './Components/Admin/Controlpanel'
 import User from './Components/User/Dashboard'
+import Page from './Components/Page'
 import axios from 'axios';
 function App() {
+  //   const nameRes = {name: "/Courge", server:"https://server-courge.herokuapp.com"}
+
+  // {name: "", server:"http://localhost:5000"}
   const initialState = {user: null, posts: [], post: null, search: ""}
   const [state, dispatch] = React.useReducer(AppReducer, initialState)
-  const nameRes = {name: "/Courge", server:"https://server-courge.herokuapp.com"}
+  const nameRes = {name: "", server:"http://localhost:5000"}
   const siteName = window.location.pathname.split("/")[1]
   const checkCurrentUser = React.useCallback(async()=>{
     try {
@@ -45,12 +49,13 @@ function App() {
         <div className="App">
           {siteName !== "cpadmin" && <Appbar nameRes={nameRes} />}
           <Routes>
-            <Route exact path={`${nameRes.name}`} element={<Posts nameRes={nameRes} />}/>
+            <Route exact path={`${nameRes.name}`} element={<Page nameRes={nameRes} />} />
+            {/* <Route exact path={`${nameRes.name}`} element={<Posts nameRes={nameRes} />}/>
             <Route exact path={`${nameRes.name}/login.html`} element={<Login nameRes={nameRes} />}/>
             <Route exact path={`${nameRes.name}/register.html`} element={<Register nameRes={nameRes} />}/>
             <Route exact path={`${nameRes.name}/post/:postId`} element={<PostDetail nameRes={nameRes} />} />
             <Route exact path={`${nameRes.name}/cpadmin`} element={<Dashboard nameRes={nameRes} />} />
-            <Route exact path={`${nameRes.name}/user`} element={<User nameRes={nameRes} />} />
+            <Route exact path={`${nameRes.name}/user`} element={<User nameRes={nameRes} />} /> */}
             <Route exact path={`${nameRes.name}/*`} element={<div>The site not found</div>} />
           </Routes>
         </div>

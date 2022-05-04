@@ -118,7 +118,7 @@ function ButtonLogin(props){
       // href={`${nameRes}/login.html`}
         <Box sx={{display: { md: 'flex' } }}>
             <Tooltip title="Login">
-                <Link onClick={()=>navigate("/Courge/login.html")} color="inherit">
+                <Link onClick={()=>navigate(`${nameRes.name}/login.html`)} color="inherit">
                   <IconButton
                       size="large"
                       onClick={handleOpenDialog}
