@@ -18,7 +18,7 @@ function App() {
   // {name: "", server:"http://localhost:5000"}
   const initialState = {user: null, posts: [], post: null, search: ""}
   const [state, dispatch] = React.useReducer(AppReducer, initialState)
-  const nameRes =  {name: "", server:"http://localhost:5000"}
+  const nameRes =  {name: "/Courge", server:"https://server-courge.herokuapp.com"}
   const siteName = window.location.pathname.split("/")[1]
   const checkCurrentUser = React.useCallback(async()=>{
     try {
