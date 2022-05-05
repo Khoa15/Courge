@@ -50,12 +50,12 @@ function App() {
           {siteName !== "cpadmin" && <Appbar nameRes={nameRes} />}
           <Routes>
             <Route exact path={`${nameRes.name}`} element={<Page nameRes={nameRes} />} />
-            {/* <Route exact path={`${nameRes.name}`} element={<Posts nameRes={nameRes} />}/>
+            {/* <Route exact path={`${nameRes.name}`} element={<Posts nameRes={nameRes} />}/> */}
             <Route exact path={`${nameRes.name}/login.html`} element={<Login nameRes={nameRes} />}/>
             <Route exact path={`${nameRes.name}/register.html`} element={<Register nameRes={nameRes} />}/>
             <Route exact path={`${nameRes.name}/post/:postId`} element={<PostDetail nameRes={nameRes} />} />
             <Route exact path={`${nameRes.name}/cpadmin`} element={<Dashboard nameRes={nameRes} />} />
-            <Route exact path={`${nameRes.name}/user`} element={<User nameRes={nameRes} />} /> */}
+            <Route exact path={`${nameRes.name}/user`} element={<User nameRes={nameRes} />} />
             <Route exact path={`${nameRes.name}/*`} element={<div>The site not found</div>} />
           </Routes>
         </div>
