@@ -1,4 +1,4 @@
-import { Container, Grid } from '@mui/material'
+import { Container, Grid, Typography } from '@mui/material'
 import axios from 'axios'
 import {useEffect, useCallback, useContext, useState} from 'react'
 import AppContext from '../AppContext'
@@ -10,6 +10,7 @@ export default function Dashboard(props){
     const {search} = state
     const [temp, setTemp] = useState(null)
     const [posts, setPosts] = useState(null)
+    const [question, setQuestion] = useState(null)
     const token = `Bearer `+localStorage.getItem('token')
     const getPosts = async() =>{
         try {
@@ -27,8 +28,24 @@ export default function Dashboard(props){
             console.log(error)
         }
     }
+    const getQuestion = async()=>{
+        try{
+            const option = {
+                method: "get",
+                headers:{
+                    Authorization: token,
+                },
+                url: server+'/api/v1/page/'
+            }
+            const res = await axios(option)
+            setQuestion(res.data.question)
+        }catch(error){
+            console.log(error)
+        }
+    }
     useEffect(()=>{
         getPosts()
+        getQuestion()
     }, [])
     useEffect(()=>{
         if(posts){
@@ -42,6 +59,18 @@ export default function Dashboard(props){
                 {posts && posts.map((post)=>(
                     <PostItem key={post._id} post={post} nameRes={props.nameRes} />
                 ))}
+            </Grid>
+            <h1>Your Question</h1>
+            <Grid container spacing={4}>
+                {
+                    question && question.map((ques)=>(
+                        <Grid item xs={12} sm={6} md={4}>
+                            <Typography gutterBottom variant={"h5"} component={"div"}>
+                                {ques.question}
+                            </Typography>
+                        </Grid>
+                    ))
+                }
             </Grid>
         </Container>
     )

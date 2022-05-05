@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router';
-import {Container, Box, Typography, TextField, Button, Checkbox, FormControlLabel} from '@mui/material'
+import {Container, Box, Typography, TextField, Button, Checkbox, FormControlLabel, FormControl, InputLabel, Select, MenuItem} from '@mui/material'
 import axios from 'axios'
 export default function Page(props){
     const stsbtn = {name: "Send", sts: "outlined"}
@@ -11,6 +11,7 @@ export default function Page(props){
     const [check3, setCheck3] = useState(false)
     const [check4, setCheck4] = useState(false)
     const [liscense, setLiscense] = useState(false)
+    const [topic, setTopic] = useState("")
     const [statusButton, setStatusButton] = useState(stsbtn)
     const navigate = useNavigate();
     const handleQuest = quest => setQuestion({...question, data: quest.target.value})
@@ -19,6 +20,7 @@ export default function Page(props){
     const handleCheck3 = () => setCheck3(!check3)
     const handleCheck4 = () => setCheck4(!check4)
     const handleLiscense = () => setLiscense(!liscense)
+    const handleTopic = topic => setTopic(topic.target.value)
     const handleAns = ans => {
         const index = Number(ans.target.id.charAt([ans.target.id.length - 1]))-1
         setAns({...answer, [index]: ans.target.value})
@@ -29,7 +31,7 @@ export default function Page(props){
         setStatusButton({name: "Sending", sts: "contained"})
         try{
             console.log(123)
-            if(liscense === false || question === "" || !Object.values(answer).reduce((a, b) => a * b)){
+            if(liscense === false || question === "" || !Object.values(answer).reduce((a, b) => a * b) || topic === ""){
                 return setStatusButton({name: "Error", sts: "contained"});
             }
             console.log(question.data)
@@ -49,13 +51,16 @@ export default function Page(props){
                         check2,
                         check3,
                         check4
-                    ]
+                    ],
+                    topic: topic
                 }
             })
+            if(res){
+                setStatusButton({name:"Success", sts:"outlined"})
+            }
         }catch(error){
             console.log(error)
         }
-        setStatusButton(stsbtn)
     }
     useEffect(()=>{
         const timer = setTimeout(()=>{
@@ -146,6 +151,16 @@ export default function Page(props){
                     onChange={handleAns}
                     value={answer[4]}
                 />
+                <FormControl fullWidth margin="normal" variant="standard">
+                    <InputLabel id="falcuty">Lĩnh vực</InputLabel>
+                    <Select labelId="falcuty" onChange={handleTopic} value={topic}>
+                        <MenuItem value={0}>Sinh hoạt đầu khóa</MenuItem>
+                        <MenuItem value={2}>Sinh hoạt giữa khóa</MenuItem>
+                        <MenuItem value={3}>Sinh hoạt cuối khóa</MenuItem>
+                        <MenuItem value={1}>Công Nghệ Thông Tin</MenuItem>
+                        <MenuItem value={4}>Khác</MenuItem>
+                    </Select>
+                </FormControl>
                 <FormControlLabel
                     margin="normal"
                     control={
